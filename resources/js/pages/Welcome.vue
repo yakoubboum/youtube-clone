@@ -6,6 +6,6 @@ import NavLayout from '@/layouts/NavLayout.vue';
 <template>
     <Head title="Home" ></Head>
 
-    <NavLayout>welcome</NavLayout>
+    <NavLayout></NavLayout>
 
 </template>
