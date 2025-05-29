@@ -37,7 +37,7 @@ const openSideNav = ref(true);
 
             <div>
                 <img
-                    class="mx-8 rounded-full cursor-pointer"
+                    class="mx-8 cursor-pointer rounded-full"
                     width="35"
                     src="https://yt3.ggpht.com/yti/ANjgQV8kMldyvhcVkIIL4Uti9095Cw_gIQ4i5rf6T8cvk03vB58=s88-c-k-c0x00ffffff-no-rj"
                 />
@@ -72,5 +72,19 @@ const openSideNav = ref(true);
             </ul>
         </div>
         <div id="SideNavOverlay"></div>
+
+        <div
+            class="w-[100%] h-[calc(100vh-60px)] absolute right-0 top-[60px] bg-amber-300"
+            :class="{
+                'w-[calc(100%-70px)]': !openSideNav,
+                'w-[calc(100%-240px)]': openSideNav,
+                'w-[100vw] xl:w-[calc(100%-80px)]': $page.url !== '/',
+                'w-[100vw]': width < 639
+            }"
+        >
+            <slot />
+        </div>
     </div>
 </template>
+
+
