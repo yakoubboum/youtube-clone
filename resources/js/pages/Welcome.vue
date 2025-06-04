@@ -20,7 +20,6 @@ const videos = [
         video: '/storage/videos/Car.mp4',
         thumbnail: '/storage/thumbnails/Car.png',
     },
-    
 ];
 </script>
 
@@ -43,11 +42,6 @@ const videos = [
             </div>
         </div>
     </NavLayout>
-
 </template>
 
-<style>
-html {
-    background-color: #0f0f0f;
-}
-</style>
+

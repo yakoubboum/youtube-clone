@@ -1,7 +1,7 @@
 <template>
     <div class="relative">
         <div
-            class="m-2 rounded-lg bg-black"
+            class="m-2 rounded-lg bg-[#0f0f0f]"
             :class="[
                 show && width > 639
                     ? 'absolute z-30 transition delay-150 duration-300 ease-in-out hover:translate-y-8 hover:scale-125 hover:bg-[#202020]'
@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineExpose, defineProps, onMounted, ref, toRefs, watch } from 'vue';
+import { defineProps, onMounted, ref, toRefs, watch } from 'vue';
 import CheckCircle from 'vue-material-design-icons/CheckCircle.vue';
 
 const props = defineProps({
@@ -86,8 +86,6 @@ watch(
         }
     },
 );
-
-defineExpose({});
 </script>
 
 <style lang="scss" scoped></style>

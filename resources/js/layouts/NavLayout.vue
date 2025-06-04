@@ -4,7 +4,13 @@ import { ref } from 'vue';
 import MagnifyIcon from 'vue-material-design-icons/Magnify.vue';
 import MenuIcon from 'vue-material-design-icons/Menu.vue';
 
-const openSideNav = ref(true);
+const openSideNav = ref(false);
+</script>
+
+<script lang="ts">
+export default {
+    name: 'NavLayout',
+};
 </script>
 
 <template>
@@ -74,17 +80,15 @@ const openSideNav = ref(true);
         <div id="SideNavOverlay"></div>
 
         <div
-            class="w-[100%] h-[calc(100vh-60px)] absolute right-0 top-[60px] bg-amber-300"
+            class="absolute top-[60px] right-15 h-[calc(100vh-60px)] w-[100%]"
             :class="{
                 'w-[calc(100%-70px)]': !openSideNav,
                 'w-[calc(100%-240px)]': openSideNav,
                 'w-[100vw] xl:w-[calc(100%-80px)]': $page.url !== '/',
-                'w-[100vw]': width < 639
+                'w-[100vw]': width < 639,
             }"
         >
             <slot />
         </div>
     </div>
 </template>
-
-

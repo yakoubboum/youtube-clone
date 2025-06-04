@@ -18,8 +18,15 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
+    LoadModule headers_module modules/mod_headers.so
+    LoadModule rewrite_module modules/mod_rewrite.so
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # Enable byte-range requests for video files
+    <FilesMatch "\.(mp4)$">
+        Header set Accept-Ranges bytes
+    </FilesMatch>
 </IfModule>

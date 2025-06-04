@@ -11,7 +11,7 @@ createServer((page) =>
     createInertiaApp({
         page,
         render: renderToString,
-        title: (title) => `${title} - ${appName}`,
+        title: (title) => title,
         resolve: (name) => resolvePageComponent(`./pages/${name}.vue`, import.meta.glob('./pages/**/*.vue')),
         setup({ App, props, plugin }) {
             const app = createSSRApp({ render: () => h(App, props) });
