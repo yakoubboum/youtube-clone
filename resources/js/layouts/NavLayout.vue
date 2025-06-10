@@ -1,10 +1,23 @@
 <script setup lang="ts">
 import SideNavItem from '@/components/SideNavItem.vue';
-import { ref } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import { computed, ref } from 'vue';
 import MagnifyIcon from 'vue-material-design-icons/Magnify.vue';
 import MenuIcon from 'vue-material-design-icons/Menu.vue';
 
 const openSideNav = ref(false);
+const page = usePage();
+
+const navBackgroundColor = computed(() => {
+    switch (page.url) {
+        case '/video/create':
+            return 'bg-[#282828]'; // Darker background for create page
+        case '/':
+            return 'bg-[#0f0f0f]'; // Default background for home
+        default:
+            return 'bg-[#0f0f0f]'; // Default background for other pages
+    }
+});
 </script>
 
 <script lang="ts">
@@ -15,7 +28,7 @@ export default {
 
 <template>
     <div class="relative">
-        <div id="TopNav" class="fixed z-20 flex h-[60px] w-[100%] items-center justify-between bg-[#0f0f0f]">
+        <div id="TopNav" class="fixed z-20 flex h-[60px] w-[100%] items-center justify-between" :class="navBackgroundColor">
             <div class="flex items-center">
                 <button @click="openSideNav = !openSideNav" class="ml-3 inline-block rounded-full p-2 hover:bg-gray-800">
                     <MenuIcon :size="26" fillColor="#FFFFFF" />
@@ -49,7 +62,11 @@ export default {
                 />
             </div>
         </div>
-        <div id="SideNav" class="fixed z-10 h-[100%] bg-[#0f0f0f]" :class="[!openSideNav ? 'w-[75px]' : 'w-[250px]']">
+        <div
+            id="SideNav"
+            class="fixed z-10 h-full text-white shadow-lg transition-all duration-300 ease-in-out"
+            :class="[openSideNav ? 'w-[250px] translate-x-0' : '-translate-x-full', navBackgroundColor]"
+        >
             <ul class="mt-[60px] w-full px-3" :class="[!openSideNav ? 'p-2' : 'px-5 pt-[7px] pb-2']">
                 <SideNavItem :openSideNav="openSideNav" iconString="Home" />
                 <SideNavItem :openSideNav="openSideNav" iconString="Add Video" />
@@ -77,17 +94,9 @@ export default {
                 </div>
             </ul>
         </div>
-        <div id="SideNavOverlay"></div>
 
-        <div
-            class="absolute top-[60px] right-15 h-[calc(100vh-60px)] w-[100%]"
-            :class="{
-                'w-[calc(100%-70px)]': !openSideNav,
-                'w-[calc(100%-240px)]': openSideNav,
-                'w-[100vw] xl:w-[calc(100%-80px)]': $page.url !== '/',
-                'w-[100vw]': width < 639,
-            }"
-        >
+
+        <div class="absolute top-[60px] left-0 right-0 bottom-0 w-full" style="min-height:calc(100vh - 60px);">
             <slot />
         </div>
     </div>

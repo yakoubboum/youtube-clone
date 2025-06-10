@@ -8,11 +8,9 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('home');
 
-
+Route::get('/video/create', [\App\Http\Controllers\VideoController::class, 'create'])->name('videos.create');
 
 Route::get('/video/{id}', [\App\Http\Controllers\VideoController::class, 'show'])->name('videos.show');
-
-Route::get('/video/add', [\App\Http\Controllers\VideoController::class, 'add'])->name('videos.add');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
