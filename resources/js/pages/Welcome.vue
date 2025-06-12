@@ -3,24 +3,18 @@ import VideoCard from '@/components/VideoCard.vue';
 import NavLayout from '@/layouts/NavLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
-const videos = [
-    {
-        id: 1,
-        title: 'Video 1',
-        user: 'John Doe',
-        views: '100',
-        video: '/storage/videos/Car.mp4',
-        thumbnail: '/storage/thumbnails/Car.png',
-    },
-    {
-        id: 1,
-        title: 'Video 1',
-        user: 'John Doe',
-        views: '100',
-        video: '/storage/videos/Car.mp4',
-        thumbnail: '/storage/thumbnails/Car.png',
-    },
-];
+defineProps<{
+    videos: Array<{
+        id: number;
+        title: string;
+        file_path: string;
+        thumbnail_path: string;
+        views: number;
+        user: {
+            name: string;
+        };
+    }>;
+}>();
 </script>
 
 <template>
@@ -28,20 +22,19 @@ const videos = [
 
     <NavLayout>
         <div>
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
                 <div v-for="video in videos" :key="video.id">
                     <VideoCard
+                        :id="video.id"
                         :title="video.title"
-                        :user="video.user"
+                        :user="video.user.name"
                         :views="video.views"
                         :image="`/storage/thumbnails/avatar${video.id}.jpg`"
-                        :videoUrl="video.video"
-                        :thumbnail="video.thumbnail"
+                        :videoUrl="video.file_path"
+                        :thumbnail="video.thumbnail_path"
                     />
                 </div>
             </div>
         </div>
     </NavLayout>
 </template>
-
-

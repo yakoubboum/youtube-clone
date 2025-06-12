@@ -3,20 +3,33 @@ import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 import { onMounted, onUnmounted, ref } from 'vue';
 
-const { src, poster } = defineProps({
-    src: {
-        type: String,
+const props = defineProps({
+    video: {
+        type: Object,
         required: true,
-    },
-    poster: {
-        type: String,
-        default: '',
     },
 });
 
 const videoRef = ref<HTMLVideoElement | null>(null);
 let player: any = null;
 let keyboardHandler: ((e: KeyboardEvent) => void) | null = null;
+
+const getVideoSource = () => {
+    if (props.video.visibility === 'public') {
+        return `/storage/${props.video.file_path}`;
+    }
+    return `/video-stream/${props.video.file_path.split('/').pop()}`;
+};
+
+const getThumbnailUrl = () => {
+    if (!props.video.thumbnail_path) {
+        return null;
+    }
+    if (props.video.visibility === 'public') {
+        return `/storage/${props.video.thumbnail_path}`;
+    }
+    return `/storage/${props.video.thumbnail_path}`;
+};
 
 const trackVideoAnalytics = () => {
     if (!player) return;
@@ -62,8 +75,18 @@ onMounted(() => {
                 nativeVideoTracks: true,
                 nativeAudioTracks: true,
                 nativeTextTracks: true,
+                hls: {
+                    overrideNative: true,
+                },
+            },
+            userActions: {
+                hotkeys: true,
+                doubleClick: true,
             },
         });
+
+        // Enable seeking
+        player.seekable(true);
 
         // Log duration on loadedmetadata
         player.on('loadedmetadata', () => {
@@ -140,8 +163,8 @@ onUnmounted(() => {
 
 <template>
     <div class="video-container">
-        <video ref="videoRef" class="video-js vjs-default-skin vjs-big-play-centered" :poster="poster">
-            <source :src="src" type="video/mp4" />
+        <video ref="videoRef" class="video-js vjs-default-skin vjs-big-play-centered" :poster="getThumbnailUrl()">
+            <source :src="getVideoSource()" type="video/mp4" />
             <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>
         </video>
     </div>

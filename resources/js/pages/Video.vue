@@ -4,6 +4,24 @@ import Recommendations from '@/components/Recommendations.vue';
 import VideoPlayer2 from '@/components/VideoPlayer2.vue';
 import NavLayout from '@/layouts/NavLayout.vue';
 import CheckCircle from 'vue-material-design-icons/CheckCircle.vue';
+
+defineProps<{
+    video: {
+        id: number;
+        title: string;
+        description: string;
+        file_path: string;
+        thumbnail_path: string;
+        views: number;
+        created_at: string;
+        likes: number;
+        visibility: string;
+        user: {
+            id: number;
+            name: string;
+        };
+    };
+}>();
 </script>
 
 <template>
@@ -15,12 +33,12 @@ import CheckCircle from 'vue-material-design-icons/CheckCircle.vue';
                 <div class="relative mx-auto ml-[100px] flex w-[60%] max-w-[1000px] flex-col items-center">
                     <!-- Video Player -->
                     <div class="w-full">
-                        <VideoPlayer2 src="/video-stream/2099568-hd_1920_1080_30fps.mp4" poster="/storage/thumbnails/Car.png" />
+                        <VideoPlayer2 :video="video" />
                     </div>
 
                     <!-- Video Info -->
                     <div class="mt-4 w-full">
-                        <h1 class="text-2xl font-bold text-white">Ferari 458</h1>
+                        <h1 class="text-2xl font-bold text-white">{{ video.title }}</h1>
 
                         <!-- Video Stats and Actions -->
                         <div class="mt-2 flex items-center justify-between">
@@ -83,7 +101,7 @@ import CheckCircle from 'vue-material-design-icons/CheckCircle.vue';
                 </div>
 
                 <!-- Recommendations Sidebar -->
-                <div class="w-[400px] flex-shrink-0 hidden sm:block">
+                <div class="hidden w-[400px] flex-shrink-0 sm:block">
                     <Recommendations />
                 </div>
             </div>

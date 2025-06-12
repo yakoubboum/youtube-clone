@@ -11,7 +11,8 @@ class VideoStreamingMiddleware
     {
         $response = $next($request);
 
-        if ($request->is('storage/videos/*')) {
+        // Only set headers for video streaming route
+        if ($request->is('video-stream/*')) {
             $response->headers->set('Accept-Ranges', 'bytes');
             $response->headers->set('Content-Type', 'video/mp4');
         }

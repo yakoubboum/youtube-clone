@@ -1,12 +1,13 @@
 <template>
     <div class="relative">
         <div
-            class="m-2 rounded-lg bg-[#0f0f0f]"
+            class="m-2 rounded-lg bg-[#0f0f0f] cursor-pointer "
             :class="[
                 show && width > 639
                     ? 'absolute z-30 transition delay-150 duration-300 ease-in-out hover:translate-y-8 hover:scale-125 hover:bg-[#202020]'
                     : '',
             ]"
+            @click="navigateToVideo"
         >
             <div
                 @mouseover="show = true"
@@ -17,11 +18,11 @@
             >
                 <img
                     class="aspect-video cursor-pointer"
-                    :src="thumbnail || ''"
+                    :src="getThumbnailUrl()"
                     :class="[show ? 'rounded-t-lg transition delay-150 ease-in-out' : 'rounded-lg', showVideo ? 'hidden delay-350' : '']"
                 />
                 <div class="aspect-video h-full w-full cursor-pointer" :class="showVideo ? '' : 'hidden delay-350'">
-                    <video ref="video" :src="videoUrl || ''" type="video/mp4" class="h-full w-full object-cover" muted loop />
+                    <video ref="video" :src="getVideoUrl()" type="video/mp4" class="h-full w-full object-cover" muted loop />
                 </div>
             </div>
 
@@ -45,24 +46,69 @@
 </template>
 
 <script setup lang="ts">
+import { router } from '@inertiajs/vue3';
 import { defineProps, onMounted, ref, toRefs, watch } from 'vue';
 import CheckCircle from 'vue-material-design-icons/CheckCircle.vue';
 
 const props = defineProps({
-    title: String,
-    user: String,
-    views: String,
-    image: String,
-    videoUrl: String,
-    thumbnail: String,
+    id: {
+        type: Number,
+        required: true,
+    },
+    title: {
+        type: String,
+        required: true,
+    },
+    user: {
+        type: String,
+        required: true,
+    },
+    views: {
+        type: Number,
+        required: true,
+    },
+    image: {
+        type: String,
+        required: true,
+    },
+    videoUrl: {
+        type: String,
+        required: true,
+    },
+    thumbnail: {
+        type: String,
+        required: true,
+    },
+    visibility: {
+        type: String,
+        default: 'public',
+    },
 });
 
-const { title, user, views, image, videoUrl, thumbnail } = toRefs(props);
+const { title, user, views, image, videoUrl, thumbnail, visibility } = toRefs(props);
 
 const show = ref(false);
 const showVideo = ref(false);
 const video = ref<HTMLVideoElement | null>(null);
 const width = ref(document.documentElement.clientWidth);
+
+const getThumbnailUrl = () => {
+    if (!thumbnail?.value) {
+        return '/storage/thumbnails/default.jpg';
+    }
+    return `/storage/${thumbnail.value}`;
+};
+
+const getVideoUrl = () => {
+    if (visibility.value === 'public') {
+        return `/storage/${videoUrl?.value || ''}`;
+    }
+    return `/video-stream/${videoUrl?.value?.split('/').pop() || ''}`;
+};
+
+const navigateToVideo = () => {
+    router.visit(`/video/${props.id}`);
+};
 
 onMounted(() => {
     window.addEventListener('resize', () => {
@@ -86,6 +132,12 @@ watch(
         }
     },
 );
+</script>
+
+<script lang="ts">
+export default {
+    name: 'VideoCard',
+};
 </script>
 
 <style lang="scss" scoped></style>

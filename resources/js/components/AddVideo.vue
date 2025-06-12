@@ -11,6 +11,8 @@ const emit = defineEmits(['update:showPopup']);
 const form = useForm({
     title: '',
     video: null as File | null,
+    thumbnail: null as File | null,
+    visibility: 'public',
 });
 
 const isUploading = ref(false);
@@ -44,6 +46,11 @@ const handleFileChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
     form.video = target.files?.[0] || null;
 };
+
+const handleThumbnailChange = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    form.thumbnail = target.files?.[0] || null;
+};
 </script>
 
 <template>
@@ -62,34 +69,68 @@ const handleFileChange = (event: Event) => {
         </div>
 
         <!-- Popup -->
-        <div v-if="isPopupVisible" class="fixed inset-0 z-[60] flex items-center justify-center">
-            <div class="popup-content rounded-lg bg-[#282828] p-4 text-white shadow-lg">
-                <h2 class="mb-4 text-xl font-bold">Add New Video</h2>
+        <div v-if="isPopupVisible" class="bg-opacity-50 fixed inset-0 z-70 flex items-center justify-center">
+            <div class="w-full max-w-2xl rounded-lg bg-[#0f0f0f] p-6">
+                <h2 class="mb-4 text-xl font-bold text-white">Upload Video</h2>
+
                 <form @submit.prevent="submitVideo">
-                    <input v-model="form.title" placeholder="Video Title" required class="mr-2 mb-2 w-full rounded-md border-1 border-gray-300 p-2" />
-                    <input
-                        @change="handleFileChange"
-                        type="file"
-                        accept="video/*"
-                        required
-                        class="mb-4 w-full rounded-md border-1 border-gray-300 p-2"
-                    />
+                    <div class="mb-4">
+                        <label class="mb-2 block text-sm font-medium text-white">Title</label>
+                        <input
+                            v-model="form.title"
+                            type="text"
+                            class="w-full rounded-lg border border-gray-600 bg-[#1f1f1f] p-2 text-white"
+                            required
+                        />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="mb-2 block text-sm font-medium text-white">Video File</label>
+                        <input
+                            type="file"
+                            accept="video/mp4,video/mov,video/avi"
+                            @change="handleFileChange"
+                            class="w-full rounded-lg border border-gray-600 bg-[#1f1f1f] p-2 text-white"
+                            required
+                        />
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="mb-2 block text-sm font-medium text-white">Thumbnail (Optional)</label>
+                        <input
+                            type="file"
+                            accept="image/jpeg,image/png,image/jpg"
+                            @change="handleThumbnailChange"
+                            class="w-full rounded-lg border border-gray-600 bg-[#1f1f1f] p-2 text-white"
+                        />
+                        <p class="mt-1 text-sm text-gray-400">If not provided, a thumbnail will be automatically generated from your video.</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="mb-2 block text-sm font-medium text-white">Visibility</label>
+                        <select v-model="form.visibility" class="w-full rounded-lg border border-gray-600 bg-[#1f1f1f] p-2 text-white">
+                            <option value="public">Public</option>
+                            <option value="private">Private</option>
+                            <option value="unlisted">Unlisted</option>
+                        </select>
+                    </div>
+
                     <div v-if="error" class="mb-4 text-red-500">{{ error }}</div>
-                    <div class="popup-actions flex justify-end">
-                        <button
-                            type="submit"
-                            :disabled="isUploading || form.processing"
-                            class="mr-2 rounded-md bg-white px-4 py-2 text-black hover:bg-gray-200 disabled:opacity-50"
-                        >
-                            {{ isUploading || form.processing ? 'Uploading...' : 'Submit' }}
-                        </button>
+
+                    <div class="flex justify-end gap-4">
                         <button
                             type="button"
                             @click="emit('update:showPopup', false)"
-                            :disabled="isUploading || form.processing"
-                            class="rounded-md bg-white px-4 py-2 text-black hover:bg-gray-200 disabled:opacity-50"
+                            class="rounded-lg bg-gray-600 px-4 py-2 text-white hover:bg-gray-700"
                         >
                             Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            :disabled="isUploading"
+                            class="rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700 disabled:opacity-50"
+                        >
+                            {{ isUploading ? 'Uploading...' : 'Upload' }}
                         </button>
                     </div>
                 </form>
