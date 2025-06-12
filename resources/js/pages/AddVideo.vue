@@ -1,17 +1,22 @@
 <script setup lang="ts">
+import AddVideo from '@/components/AddVideo.vue';
 import NavLayout from '@/layouts/NavLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import { ref } from 'vue';
+
+const showPopup = ref(false);
 </script>
 
 <template>
     <Head title="Add Video"></Head>
 
     <NavLayout>
+        <!-- Overlay -->
+        <div v-if="showPopup" class="fixed inset-0 z-50 bg-black/50"></div>
+
+        <!-- Main Content -->
         <div class="w-full bg-[#282828] p-3">
-            <h1 class="text-2xl font-bold text-white">Your videos</h1>
-            <div>
-                <button class="mt-2 rounded-md bg-white px-4 py-2 text-black hover:bg-gray-200 cursor-pointer">Add Video</button>
-            </div>
+            <AddVideo v-model:showPopup="showPopup" />
 
             <div class="mt-4">
                 <table class="w-full border-t-[0.5px] border-b-[0.5px] border-gray-300">
@@ -26,63 +31,63 @@ import { Head } from '@inertiajs/vue3';
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="h-[200px] w-[300px] border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex flex-col items-center justify-center h-full">
-                                    <img src="/storage/thumbnails/Car.png" alt="" class="object-cover mb-2" />
+                            <td class="h-[200px] w-[300px] border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full flex-col items-center justify-center">
+                                    <img src="/storage/thumbnails/Car.png" alt="" class="mb-2 object-cover" />
                                     <p class="text-white">Car</p>
                                 </div>
                             </td>
-                            <td class="border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex items-center justify-center h-full">public</div>
+                            <td class="border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full items-center justify-center">public</div>
                             </td>
-                            <td class="border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex items-center justify-center h-full">2025-01-01</div>
+                            <td class="border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full items-center justify-center">2025-01-01</div>
                             </td>
-                            <td class="border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex items-center justify-center h-full">100</div>
+                            <td class="border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full items-center justify-center">100</div>
                             </td>
-                            <td class="border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex items-center justify-center h-full">100</div>
+                            <td class="border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full items-center justify-center">100</div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="h-[200px] w-[300px] border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex flex-col items-center justify-center h-full">
-                                    <img src="/storage/thumbnails/Car.png" alt="" class="object-cover mb-2" />
+                            <td class="h-[200px] w-[300px] border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full flex-col items-center justify-center">
+                                    <img src="/storage/thumbnails/Car.png" alt="" class="mb-2 object-cover" />
                                     <p class="text-white">Car</p>
                                 </div>
                             </td>
-                            <td class="border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex items-center justify-center h-full">public</div>
+                            <td class="border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full items-center justify-center">public</div>
                             </td>
-                            <td class="border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex items-center justify-center h-full">2025-01-01</div>
+                            <td class="border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full items-center justify-center">2025-01-01</div>
                             </td>
-                            <td class="border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex items-center justify-center h-full">100</div>
+                            <td class="border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full items-center justify-center">100</div>
                             </td>
-                            <td class="border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex items-center justify-center h-full">100</div>
+                            <td class="border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full items-center justify-center">100</div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="h-[200px] w-[300px] border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex flex-col items-center justify-center h-full">
-                                    <img src="/storage/thumbnails/Car.png" alt="" class="object-cover mb-2" />
+                            <td class="h-[200px] w-[300px] border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full flex-col items-center justify-center">
+                                    <img src="/storage/thumbnails/Car.png" alt="" class="mb-2 object-cover" />
                                     <p class="text-white">Car</p>
                                 </div>
                             </td>
-                            <td class="border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex items-center justify-center h-full">public</div>
+                            <td class="border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full items-center justify-center">public</div>
                             </td>
-                            <td class="border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex items-center justify-center h-full">2025-01-01</div>
+                            <td class="border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full items-center justify-center">2025-01-01</div>
                             </td>
-                            <td class="border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex items-center justify-center h-full">100</div>
+                            <td class="border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full items-center justify-center">100</div>
                             </td>
-                            <td class="border-b-[0.5px] border-gray-300 p-2 text-white align-middle">
-                                <div class="flex items-center justify-center h-full">100</div>
+                            <td class="border-b-[0.5px] border-gray-300 p-2 align-middle text-white">
+                                <div class="flex h-full items-center justify-center">100</div>
                             </td>
                         </tr>
                     </tbody>
