@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/video/create', [VideoController::class, 'create'])->name('videos.create');
     Route::post('/video/store', [VideoController::class, 'store'])->name('videos.store');
     Route::get('/video/{id}', [VideoController::class, 'show'])->name('video.show');
+    Route::delete('/video/{id}', [VideoController::class, 'destroy'])->name('video.destroy');
 });
 
 require __DIR__ . '/settings.php';

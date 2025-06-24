@@ -15,9 +15,6 @@ let player: any = null;
 let keyboardHandler: ((e: KeyboardEvent) => void) | null = null;
 
 const getVideoSource = () => {
-    if (props.video.visibility === 'public') {
-        return `/storage/${props.video.file_path}`;
-    }
     return `/video-stream/${props.video.file_path.split('/').pop()}`;
 };
 

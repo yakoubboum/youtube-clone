@@ -13,6 +13,7 @@ const form = useForm({
     video: null as File | null,
     thumbnail: null as File | null,
     visibility: 'public',
+    
 });
 
 const isUploading = ref(false);

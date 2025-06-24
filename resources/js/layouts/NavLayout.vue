@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SideNavItem from '@/components/SideNavItem.vue';
-import { usePage } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 import MagnifyIcon from 'vue-material-design-icons/Magnify.vue';
 import MenuIcon from 'vue-material-design-icons/Menu.vue';
@@ -36,7 +36,11 @@ export default {
 
                 <div class="mx-2"></div>
 
-                <div class="mr-10 flex cursor-pointer items-center justify-center text-white">YouTube</div>
+                <div class="mr-10 flex cursor-pointer items-center justify-center">
+                    <Link href="/" class="flex items-center text-white">
+                        <span class="text-2xl font-bold">YouTube</span>
+                    </Link>
+                </div>
             </div>
 
             <div class="hidden w-[600px] md:block">
@@ -95,8 +99,7 @@ export default {
             </ul>
         </div>
 
-
-        <div class="absolute top-[60px] left-0 right-0 bottom-0 w-full" style="min-height:calc(100vh - 60px);">
+        <div class="absolute top-[60px] right-0 bottom-0 left-0 w-full" style="min-height: calc(100vh - 60px)">
             <slot />
         </div>
     </div>

@@ -17,11 +17,16 @@ class VideoController extends Controller
 {
     public function create()
     {
-        return Inertia::render('AddVideo');
+        $videos = Video::where('user_id', Auth::id())->get();
+
+        return Inertia::render('AddVideo', [
+            'videos' => $videos
+        ]);
     }
 
     public function store(Request $request)
     {
+
         try {
             DB::beginTransaction();
             $request->validate([
@@ -59,7 +64,9 @@ class VideoController extends Controller
                 $thumbnailFile->storeAs('thumbnails', $thumbnailName, $disk);
             } else {
                 // Generate thumbnail from video if no thumbnail was uploaded
+                Log::info('Starting thumbnail generation');
                 $thumbnailPath = $this->generateThumbnail($videoFile, $visibility);
+                Log::info('Finished thumbnail generation');
             }
 
             $video = Video::create([
@@ -134,26 +141,48 @@ class VideoController extends Controller
     public function show($id)
     {
         $video = Video::with('user')->findOrFail($id);
-
-        // Increment view count
         $video->increment('views');
 
         return Inertia::render('Video', [
-            'video' => [
-                'id' => $video->id,
-                'title' => $video->title,
-                'description' => $video->description,
-                'file_path' => $video->file_path,
-                'thumbnail_path' => $video->thumbnail_path,
-                'views' => $video->views,
-                'likes' => $video->likes,
-                'created_at' => $video->created_at,
-                'visibility' => $video->visibility,
-                'user' => [
-                    'id' => $video->user->id,
-                    'name' => $video->user->name,
-                ],
-            ],
+            'video' => $video
         ]);
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $video = Video::where('user_id', Auth::id())->findOrFail($id);
+
+            // Delete video file
+            if ($video->file_path) {
+                $disk = $video->visibility === 'public' ? 'public' : 'private';
+                Storage::disk($disk)->delete($video->file_path);
+            }
+
+            // Delete thumbnail
+            if ($video->thumbnail_path) {
+                $disk = $video->visibility === 'public' ? 'public' : 'private';
+                Storage::disk($disk)->delete($video->thumbnail_path);
+            }
+
+            // Delete from database
+            $video->delete();
+
+            return back()->with('success', 'Video deleted successfully');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to delete video: ' . $e->getMessage());
+        }
+    }
+
+    public function like($id)
+    {
+        try {
+            $video = Video::findOrFail($id);
+            $video->increment('likes');
+
+            return response()->json(['success' => true, 'likes' => $video->likes], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 }
