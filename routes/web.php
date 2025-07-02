@@ -15,6 +15,11 @@ Route::get('/', function () {
     return Inertia::render('Welcome', ['videos' => $videos]);
 })->name('home');
 
+
+Route::get('/test', function () {
+    return "Hello World";
+});
+
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -22,6 +27,7 @@ Route::get('dashboard', function () {
 Route::get('/video-stream/{filename}', [VideoStreamController::class, 'stream'])
     ->middleware(['auth'])
     ->name('video.stream');
+    
 
 
 // Route::get('/video/{id}', [VideoController::class, 'show'])->name('videos.show');

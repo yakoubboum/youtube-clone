@@ -22,7 +22,7 @@ defineProps<{
 
     <NavLayout>
         <div>
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 bg-[#0f0f0f] h-[calc(100%-60px)]">
                 <div v-for="video in videos" :key="video.id">
                     <VideoCard
                         :id="video.id"

@@ -52,7 +52,7 @@ onMounted(() => {
     if (videoRef.value) {
         player = videojs(videoRef.value, {
             controls: true,
-            autoplay: false,
+            autoplay: true,
             preload: 'auto',
             fluid: true,
             playbackRates: [0.5, 1, 1.5, 2],

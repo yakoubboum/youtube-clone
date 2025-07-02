@@ -1,36 +1,3 @@
-<template>
-    <div class="recommendations">
-        <!-- Recommendations Header -->
-        <div class="mb-4">
-            <h2 class="text-lg font-semibold text-white">Recommended</h2>
-        </div>
-
-        <!-- Recommendations List -->
-        <div class="flex flex-col gap-3">
-            <div v-for="video in recommendations" :key="video.id" class="flex cursor-pointer gap-2 rounded-lg p-2 hover:bg-[#272727]">
-                <!-- Thumbnail Container -->
-                <div class="relative h-[94px] w-[168px] flex-shrink-0">
-                    <img :src="video.thumbnail" class="h-full w-full rounded-lg object-cover" />
-                    <span class="bg-opacity-80 absolute right-1 bottom-1 rounded bg-black px-1 text-xs text-white">
-                        {{ video.duration }}
-                    </span>
-                </div>
-
-                <!-- Video Info -->
-                <div class="flex flex-col gap-1">
-                    <h3 class="line-clamp-2 text-sm font-medium text-white">{{ video.title }}</h3>
-                    <p class="text-xs text-gray-400">{{ video.channel }}</p>
-                    <div class="flex items-center gap-1 text-xs text-gray-400">
-                        <span>{{ video.views }}</span>
-                        <span>•</span>
-                        <span>{{ video.timestamp }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
-
 <script setup lang="ts">
 import { ref } from 'vue';
 
@@ -81,31 +48,56 @@ const recommendations = ref([
         timestamp: '2 weeks ago',
         duration: '14:30',
     },
+    {
+        id: 6,
+        thumbnail: 'https://picsum.photos/seed/6/320/180',
+        title: 'Classic Car Restoration',
+        channel: 'Restore & Drive',
+        views: '950K views',
+        timestamp: '3 weeks ago',
+        duration: '25:50',
+    },
+    {
+        id: 7,
+        thumbnail: 'https://picsum.photos/seed/7/320/180',
+        title: 'Building a Race Car from Scratch',
+        channel: 'DIY Garage',
+        views: '4.1M views',
+        timestamp: '2 months ago',
+        duration: '45:10',
+    },
 ]);
 </script>
 
-<style scoped>
-.recommendations {
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-    padding-right: 8px;
-}
+<template>
+    <div class="recommendations">
+        <!-- Recommendations Header -->
+        <div class="mb-4">
+            <h2 class="text-lg font-semibold text-white">Recommended</h2>
+        </div>
 
-/* Custom scrollbar styling */
-.recommendations::-webkit-scrollbar {
-    width: 8px;
-}
+        <!-- Recommendations List -->
+        <div class="flex flex-col gap-3">
+            <div v-for="video in recommendations" :key="video.id" class="flex cursor-pointer gap-2 rounded-lg p-2 hover:bg-[#272727]">
+                <!-- Thumbnail Container -->
+                <div class="relative h-[94px] w-[168px] flex-shrink-0">
+                    <img :src="video.thumbnail" class="h-full w-full rounded-lg object-cover" />
+                    <span class="bg-opacity-80 absolute right-1 bottom-1 rounded bg-black px-1 text-xs text-white">
+                        {{ video.duration }}
+                    </span>
+                </div>
 
-.recommendations::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.recommendations::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-}
-
-.recommendations::-webkit-scrollbar-thumb:hover {
-    background: #b40e0e;
-}
-</style>
+                <!-- Video Info -->
+                <div class="flex flex-col gap-1">
+                    <h3 class="line-clamp-2 text-sm font-medium text-white">{{ video.title }}</h3>
+                    <p class="text-xs text-gray-400">{{ video.channel }}</p>
+                    <div class="flex items-center gap-1 text-xs text-gray-400">
+                        <span>{{ video.views }}</span>
+                        <span>•</span>
+                        <span>{{ video.timestamp }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
