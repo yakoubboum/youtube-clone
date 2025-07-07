@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('file_path');
             $table->string('thumbnail_path')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            
             $table->enum('visibility', ['public', 'private', 'unlisted'])->default('public');
             $table->integer('views')->default(0);
             $table->integer('likes')->default(0);

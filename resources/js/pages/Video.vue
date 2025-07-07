@@ -52,11 +52,10 @@ defineProps<{
 
 <template>
     <NavLayout>
-        <div class="bg-[#0f0f0f] p-3">
-            <!-- Main Content and Recommendations Container -->
-            <div class="ml-[100px] flex max-w-screen-2xl items-start gap-x-8 p-6">
+        <div class="w-full bg-[#0f0f0f] lg:pl-27 pt-6.5 sm:px-5">
+            <div class="flex w-full flex-col items-start gap-x-8 xl:flex-row bg-[#0f0f0f] ">
                 <!-- Main Content -->
-                <div class="flex w-full max-w-4xl flex-col items-center lg:w-8/12">
+                <div class="flex w-full max-w-4xl flex-col items-center">
                     <!-- Video Player -->
                     <div class="w-full">
                         <VideoPlayer2 :video="video" />
@@ -67,13 +66,10 @@ defineProps<{
                         <h1 class="text-2xl font-bold text-white">{{ video.title }}</h1>
 
                         <!-- Video Stats and Actions -->
-                        <div class="mt-2 flex items-center justify-between">
+                        <div class="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                             <div class="flex items-center gap-4">
                                 <div class="flex items-center">
-                                    <img
-                                        class="h-10 w-10 rounded-full"
-                                        :src="`https://picsum.photos/id/100/100` || ''"
-                                    />
+                                    <img class="h-10 w-10 rounded-full" :src="`https://picsum.photos/id/100/100`" />
                                     <div class="ml-3">
                                         <div class="flex items-center text-lg font-semibold text-white">
                                             yb <CheckCircle class="ml-1" fillColor="#888888" :size="17" />
@@ -83,8 +79,6 @@ defineProps<{
                                 </div>
                                 <button class="rounded-full bg-white px-4 py-2 font-semibold text-black hover:bg-gray-200">Subscribe</button>
                             </div>
-
-                            
 
                             <!-- Video Actions -->
                             <div class="flex items-center gap-2">
@@ -101,11 +95,11 @@ defineProps<{
                                     </button>
                                 </div>
                                 <button class="flex items-center gap-2 rounded-full bg-[#272727] px-4 py-2 text-white hover:bg-[#3f3f3f]">
-                                    <img :src="shareIcon">
+                                    <img :src="shareIcon" />
                                     Share
                                 </button>
                                 <button class="flex items-center rounded-full bg-[#272727] p-2 text-white hover:bg-[#3f3f3f]">
-                                    <img :src="threedots">
+                                    <img :src="threedots" />
                                 </button>
                             </div>
                         </div>
@@ -128,7 +122,7 @@ defineProps<{
                 </div>
 
                 <!-- Recommendations Sidebar -->
-                <div class="hidden w-[400px] flex-shrink-0 sm:block">
+                <div class="mt-6 flex-shrink-0 sm:mt-0">
                     <Recommendations />
                 </div>
             </div>

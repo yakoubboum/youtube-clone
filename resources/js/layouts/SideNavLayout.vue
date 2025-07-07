@@ -14,7 +14,7 @@ const { openSideNav, navBackgroundColor } = toRefs(props);
 <template>
     <div
         id="SideNav"
-        class="fixed top-[60px] z-20 h-[calc(100vh-60px)] overflow-y-auto scrollbar-thumb-rounded scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900 text-white shadow-lg transition-all duration-300 ease-in-out"
+        class="fixed top-[55px] z-20 h-[calc(100vh-55px)] overflow-y-auto scrollbar-thumb-rounded scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900 text-white shadow-lg transition-all duration-300 ease-in-out"
         :class="[openSideNav ? 'w-[250px] translate-x-0' : '-translate-x-full', navBackgroundColor]"
     >
         <ul class="mt-[10px] w-full px-3" :class="[!openSideNav ? 'p-2' : 'px-5 pt-[7px] pb-2']">

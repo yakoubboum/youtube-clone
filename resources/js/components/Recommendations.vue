@@ -14,73 +14,59 @@ const recommendations = ref([
     },
     {
         id: 2,
-        thumbnail: 'https://picsum.photos/seed/2/320/180',
-        title: 'Top 10 Supercars of the Year',
-        channel: 'Supercar Reviews',
-        views: '856K views',
-        timestamp: '1 week ago',
-        duration: '15:45',
+        thumbnail: 'https://picsum.photos/seed/1/320/180',
+        title: 'Amazing Car Collection 2024',
+        channel: 'Car Enthusiasts',
+        views: '1.2M views',
+        timestamp: '2 days ago',
+        duration: '12:34',
     },
     {
         id: 3,
-        thumbnail: 'https://picsum.photos/seed/3/320/180',
-        title: 'Luxury Car Showcase 2024',
-        channel: 'Luxury Motors',
-        views: '2.1M views',
-        timestamp: '3 days ago',
-        duration: '18:22',
+        thumbnail: 'https://picsum.photos/seed/1/320/180',
+        title: 'Amazing Car Collection 2024',
+        channel: 'Car Enthusiasts',
+        views: '1.2M views',
+        timestamp: '2 days ago',
+        duration: '12:34',
     },
     {
         id: 4,
-        thumbnail: 'https://picsum.photos/seed/4/320/180',
-        title: 'Ferrari vs Lamborghini Comparison',
-        channel: 'Car Comparisons',
-        views: '3.4M views',
-        timestamp: '1 month ago',
-        duration: '22:15',
+        thumbnail: 'https://picsum.photos/seed/1/320/180',
+        title: 'Amazing Car Collection 2024',
+        channel: 'Car Enthusiasts',
+        views: '1.2M views',
+        timestamp: '2 days ago',
+        duration: '12:34',
     },
     {
         id: 5,
-        thumbnail: 'https://picsum.photos/seed/5/320/180',
-        title: 'Electric Supercars of the Future',
-        channel: 'Future Cars',
-        views: '1.5M views',
-        timestamp: '2 weeks ago',
-        duration: '14:30',
-    },
-    {
-        id: 6,
-        thumbnail: 'https://picsum.photos/seed/6/320/180',
-        title: 'Classic Car Restoration',
-        channel: 'Restore & Drive',
-        views: '950K views',
-        timestamp: '3 weeks ago',
-        duration: '25:50',
-    },
-    {
-        id: 7,
-        thumbnail: 'https://picsum.photos/seed/7/320/180',
-        title: 'Building a Race Car from Scratch',
-        channel: 'DIY Garage',
-        views: '4.1M views',
-        timestamp: '2 months ago',
-        duration: '45:10',
+        thumbnail: 'https://picsum.photos/seed/1/320/180',
+        title: 'Amazing Car Collection 2024',
+        channel: 'Car Enthusiasts',
+        views: '1.2M views',
+        timestamp: '2 days ago',
+        duration: '12:34',
     },
 ]);
 </script>
 
 <template>
-    <div class="recommendations">
+    <div class="recommendations ">
         <!-- Recommendations Header -->
         <div class="mb-4">
             <h2 class="text-lg font-semibold text-white">Recommended</h2>
         </div>
 
         <!-- Recommendations List -->
-        <div class="flex flex-col gap-3">
-            <div v-for="video in recommendations" :key="video.id" class="flex cursor-pointer gap-2 rounded-lg p-2 hover:bg-[#272727]">
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-1 xl:w-[450px]">
+            <div
+                v-for="video in recommendations"
+                :key="video.id"
+                class="lg:flex-start mx-auto flex w-[600px] max-w-full cursor-pointer flex-col gap-2 rounded-lg p-2 hover:bg-[#272727] xl:flex-row"
+            >
                 <!-- Thumbnail Container -->
-                <div class="relative h-[94px] w-[168px] flex-shrink-0">
+                <div class="relative mx-auto w-full flex-shrink-0 xl:h-[94px] xl:w-[168px]">
                     <img :src="video.thumbnail" class="h-full w-full rounded-lg object-cover" />
                     <span class="bg-opacity-80 absolute right-1 bottom-1 rounded bg-black px-1 text-xs text-white">
                         {{ video.duration }}
@@ -88,10 +74,10 @@ const recommendations = ref([
                 </div>
 
                 <!-- Video Info -->
-                <div class="flex flex-col gap-1">
+                <div class="flex w-full flex-col gap-1 text-left">
                     <h3 class="line-clamp-2 text-sm font-medium text-white">{{ video.title }}</h3>
-                    <p class="text-xs text-gray-400">{{ video.channel }}</p>
-                    <div class="flex items-center gap-1 text-xs text-gray-400">
+                    <p class="cursor-pointer text-xs text-gray-400 transition-colors duration-150 hover:text-white">{{ video.channel }}</p>
+                    <div class="flex items-center justify-start gap-1 text-xs text-gray-400">
                         <span>{{ video.views }}</span>
                         <span>•</span>
                         <span>{{ video.timestamp }}</span>

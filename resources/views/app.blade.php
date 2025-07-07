@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{-- Inline script to detect system dark mode preference and apply it immediately --}}
-    <script>
+    {{-- <script>
         (function() {
             const appearance = '{{ $appearance ?? 'system' }}';
 
@@ -18,19 +18,9 @@
                 }
             }
         })();
-    </script>
-
-    {{-- Inline style to set the HTML background color based on our theme in app.css --}}
-    <style>
-        html.dark {
-            background-color: oklch(0.145 0 0);
-        }
+    </script> --}}
 
 
-        html {
-            background-color: #0f0f0f;
-        }
-    </style>
 
     <title inertia>{{ isset($title) ? $title : 'Youtube' }}</title>
 

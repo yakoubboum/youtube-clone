@@ -48,7 +48,7 @@ export default {
         <TopNavLayout :navBackgroundColor="navBackgroundColor" @openSideNav="openSideNav = !openSideNav" />
         <SideNavLayout :openSideNav="openSideNav" :navBackgroundColor="navBackgroundColor" />
 
-        <div class="absolute top-[55px] right-0 bottom-0 left-0 w-full" style="min-height: calc(100vh - 55px)">
+        <div class="absolute top-[55px] right-0 bottom-0 left-0 h-full" :class="navBackgroundColor">
             <slot />
         </div>
     </div>

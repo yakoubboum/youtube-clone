@@ -119,7 +119,7 @@
     --secondary: hsl(0 0% 14.9%);
     --secondary-foreground: hsl(0 0% 98%);
     --muted: hsl(0 0% 16.08%);
-    --muted-foreground: hsl(0 0% 63.9%);
+    --muted-foreground: #a3a3a3;
     --accent: hsl(0 0% 14.9%);
     --accent-foreground: hsl(0 0% 98%);
     --destructive: hsl(0 84% 60%);
@@ -147,15 +147,7 @@
     * {
         @apply border-border outline-ring/50;
     }
-    html {
-        background-color: #0f0f0f;
-    }
     body {
         @apply bg-background text-foreground;
     }
 }
-
-
-/*
-  ---break---
-*/
