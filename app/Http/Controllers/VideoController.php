@@ -141,7 +141,7 @@ class VideoController extends Controller
     public function show($id)
     {
         $video = Video::with('user')->findOrFail($id);
-        $video->increment('views');
+        
 
         return Inertia::render('Video', [
             'video' => $video

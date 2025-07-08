@@ -37,7 +37,7 @@
     @inertiaHead
 </head>
 
-<body class="font-sans antialiased ">
+<body class="font-sans antialiased " style="font-family:Roboto, sans-serif;">
     @inertia
 </body>
 

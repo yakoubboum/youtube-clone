@@ -49,6 +49,8 @@ const recommendations = ref([
         duration: '12:34',
     },
 ]);
+
+
 </script>
 
 <template>
@@ -81,6 +83,7 @@ const recommendations = ref([
                         <span>{{ video.views }}</span>
                         <span>•</span>
                         <span>{{ video.timestamp }}</span>
+                        
                     </div>
                 </div>
             </div>

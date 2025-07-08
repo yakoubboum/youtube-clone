@@ -33,8 +33,6 @@ const navBackgroundColor = computed(() => {
             return 'bg-[#0f0f0f]'; // Default background for other pages
     }
 });
-
-
 </script>
 
 <script lang="ts">
@@ -46,6 +44,7 @@ export default {
 <template>
     <div class="relative">
         <TopNavLayout :navBackgroundColor="navBackgroundColor" @openSideNav="openSideNav = !openSideNav" />
+
         <SideNavLayout :openSideNav="openSideNav" :navBackgroundColor="navBackgroundColor" />
 
         <div class="absolute top-[55px] right-0 bottom-0 left-0 h-full" :class="navBackgroundColor">
